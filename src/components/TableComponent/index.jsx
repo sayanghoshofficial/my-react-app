@@ -14,7 +14,7 @@ const TableComponent = () => {
   // Collect all unique dates and sort them
   const allDates = Array.from(
     new Set(
-      mockData.flatMap((item) =>
+      mockData?.flatMap((item) =>
         Object.keys(item).filter((key) => key !== "region")
       )
     )
@@ -36,7 +36,7 @@ const TableComponent = () => {
   const dateColumns = allDates.reduce((acc, date) => {
     acc[date] = Array.from(
       new Set(
-        mockData.flatMap((item) => (item[date] ? Object.keys(item[date]) : []))
+        mockData?.flatMap((item) => (item[date] ? Object.keys(item[date]) : []))
       )
     );
     return acc;
@@ -56,30 +56,30 @@ const TableComponent = () => {
                 width: `${viewSizeCalculator(161, true)}`,
               }}
             ></Th>
-            {allDates.map((date) => (
+            {allDates?.map((date) => (
               <Th colSpan={dateColumns[date].length} key={date}>
                 {date}
               </Th>
             ))}
           </tr>
           <tr>
-            {allDates.map((date) =>
+            {allDates?.map((date) =>
               dateColumns[date].map((col) => <Th key={date + col}>{col}</Th>)
             )}
           </tr>
         </THead>
         <tbody>
-          {mockData.map((item, idx) => (
+          {mockData?.map((item, idx) => (
             <tr key={item.region}>
               <FixedColumn>
                 <div style={{ width: `${viewSizeCalculator(161, true)}` }}>
                   {item.region}
                 </div>
               </FixedColumn>
-              {allDates.map((date) =>
+              {allDates?.map((date) =>
                 dateColumns[date].map((col) => (
                   <Td key={item.region + date + col}>
-                    {item[date]?.[col] ?? "-"}
+                    {item[date]?.[col] ?? ""}
                   </Td>
                 ))
               )}
