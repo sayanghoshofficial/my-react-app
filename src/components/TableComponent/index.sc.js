@@ -44,6 +44,7 @@ export const Td = styled.td`
   font-size: ${viewSizeCalculator(11, true)};
   line-height: ${viewSizeCalculator(13, true)};
   width: ${viewSizeCalculator(131, true)} !important;
+  text-align: center;
   font-weight: 500;
   font-family: 'Inter';
   color: #242639;
