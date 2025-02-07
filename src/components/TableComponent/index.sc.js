@@ -8,7 +8,28 @@ export const TableWrapper = styled.div`
   overflow-x: auto;
   overflow-y: auto;
   position: relative;
+
+  /* Scrollbar Styles */
+  /* Webkit (Chrome, Edge, Safari) */
+  &::-webkit-scrollbar {
+    width: ${viewSizeCalculator(3, true)};  /* Vertical scrollbar width */
+    height: ${viewSizeCalculator(3, true)};  /* Horizontal scrollbar height */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color:rgba(51, 51, 51, 0.3);
+    border-radius: ${viewSizeCalculator(1.5, true)};
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color:rgba(245, 245, 245, 1);
+  }
+
+  /* Firefox */
+  scrollbar-width: thin; /* Makes scrollbar thinner */
+  scrollbar-color: rgba(51, 51, 51, 0.3) rgba(245, 245, 245, 1);
 `;
+
 
 export const StyledTable = styled.table`
   min-width: 100%;
