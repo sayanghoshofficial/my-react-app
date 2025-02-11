@@ -53,7 +53,6 @@ const TableComponent = () => {
                 position: "sticky",
                 top: 0,
                 left: 0,
-                width: `${viewSizeCalculator(161, true)}`,
               }}
             ></Th>
             {allDates?.map((date) => (
@@ -72,7 +71,7 @@ const TableComponent = () => {
           {mockData?.map((item, idx) => (
             <tr key={item.region}>
               <FixedColumn>
-                <div style={{ width: `${viewSizeCalculator(161, true)}` }}>
+                <div style={{ minWidth: `${viewSizeCalculator(161, true)}` }}>
                   {item.region}
                 </div>
               </FixedColumn>

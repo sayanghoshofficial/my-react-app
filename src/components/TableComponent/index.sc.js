@@ -50,7 +50,7 @@ export const THead = styled.thead`
 export const Th = styled.th`
   border: ${viewSizeCalculator(1, true)} solid rgba(194, 204, 217, 0.8);
   padding: ${viewSizeCalculator(13, true)} ${viewSizeCalculator(15, true)};
-  width: ${() => viewSizeCalculator(131, true)} !important;
+  min-width: ${() => viewSizeCalculator(131, true)} !important;
   font-size: ${viewSizeCalculator(11, true)};
   line-height: ${viewSizeCalculator(13, true)};
   font-weight: 700;
@@ -64,7 +64,7 @@ export const Td = styled.td`
   padding: ${viewSizeCalculator(13, true)} ${viewSizeCalculator(15, true)};
   font-size: ${viewSizeCalculator(11, true)};
   line-height: ${viewSizeCalculator(13, true)};
-  width: ${viewSizeCalculator(131, true)} !important;
+  min-width: ${viewSizeCalculator(131, true)} !important;
   text-align: center;
   font-weight: 500;
   font-family: 'Inter';
@@ -78,7 +78,7 @@ export const FixedColumn = styled.td`
   background-color: white;
   border: ${viewSizeCalculator(1, true)} solid rgba(194, 204, 217, 0.8);
   z-index: 20;
-  width: ${viewSizeCalculator(161, true)} !important;
+  min-width: ${viewSizeCalculator(161, true)} !important;
   padding: ${viewSizeCalculator(13, true)} ${viewSizeCalculator(15, true)};
   font-size: ${viewSizeCalculator(11, true)};
   line-height: ${viewSizeCalculator(13, true)};
