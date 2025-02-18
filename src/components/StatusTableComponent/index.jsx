@@ -174,8 +174,9 @@ const KPIAdminTable = ({ data }) => {
                       <Td
                         key={period}
                         bg={getBgColor(statusObj?.color)}
-                        style={{ textAlign: "center" }}
+                        style={{ textAlign: "center", cursor: "pointer" }}
                         expanded={openColumns[period]}
+                        onClick={() => handleColumnClick(month, year)}
                       ></Td>
                       {openColumns[period] &&
                         availableSubColumns.map(({ key }) => (

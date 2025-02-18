@@ -52,7 +52,7 @@ export const Th = styled.th`
   z-index: 3;
   border: ${(props) =>
     props.expanded
-      ? `${viewSizeCalculator(2, true)} solid red`
+      ? `${viewSizeCalculator(1, true)} solid red`
       : `${viewSizeCalculator(1, true)} solid rgba(194, 204, 217, 0.8)`};
        box-sizing: border-box;
 `;
@@ -70,7 +70,7 @@ export const Td = styled.td`
   background: ${(props) => props.bg || "#fff"};
   border: ${(props) =>
     props.expanded
-      ? `${viewSizeCalculator(2, true)} solid red`
+      ? `${viewSizeCalculator(1, true)} solid red`
       : `${viewSizeCalculator(1, true)} solid rgba(194, 204, 217, 0.8)`};
        box-sizing: border-box;
 `;
