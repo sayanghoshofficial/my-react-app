@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { StickyTd, StyledTable, TableContainer, Td, Th } from "./index.sc";
-import { getBgColor } from "./utils";
+import { getBgColor, months, columnsConfig } from "./utils";
+import { mockData } from "./mockData";
 
-const KPIAdminTable = ({ data }) => {
+const KPIAdminTable = ({}) => {
   const [columnWidths, setColumnWidths] = useState({});
   const [openColumns, setOpenColumns] = useState({});
-
+  const data = mockData.data;
   const slNoRef = useRef();
   const kpiRef = useRef();
   const stakeholdersRef = useRef();
@@ -29,20 +30,6 @@ const KPIAdminTable = ({ data }) => {
     };
   }, [data, openColumns]);
 
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
   const years = Array.from(
     new Set(
       data.flatMap((item) =>
@@ -62,12 +49,6 @@ const KPIAdminTable = ({ data }) => {
       return newState;
     });
   };
-
-  const columnsConfig = [
-    { key: "dataBricks", label: "DataBricks" },
-    { key: "sdb", label: "SDB" },
-    { key: "pipeline", label: "Pipeline" },
-  ];
 
   const availableSubColumns = columnsConfig.filter(({ key }) =>
     data.some((item) =>
@@ -125,6 +106,10 @@ const KPIAdminTable = ({ data }) => {
             {years.map((year) =>
               months.map((month) => {
                 const period = `${month.toUpperCase()}'${year.slice(-2)}`;
+                const isMonthSelect =
+                  month.toLowerCase() ===
+                    Object.keys(openColumns)[0]?.slice(0, 3).toLowerCase() ||
+                  false;
                 return (
                   <>
                     <Th
@@ -132,15 +117,17 @@ const KPIAdminTable = ({ data }) => {
                       style={{ textAlign: "center", cursor: "pointer" }}
                       onClick={() => handleColumnClick(month, year)}
                       expanded={openColumns[period]}
+                      isFirst={isMonthSelect}
                     >
                       {month}
                     </Th>
                     {openColumns[period] &&
-                      availableSubColumns.map(({ key, label }) => (
+                      availableSubColumns.map(({ key, label }, columnIdx) => (
                         <Th
                           key={`${period}-${key}`}
                           style={{ textAlign: "center" }}
                           expanded={openColumns[period]}
+                          isLast={columnIdx === availableSubColumns.length - 1}
                         >
                           {label}
                         </Th>
@@ -152,49 +139,68 @@ const KPIAdminTable = ({ data }) => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item, index) => (
-            <tr key={index}>
-              <StickyTd style={{ left: 0 }}>{index + 1}</StickyTd>
-              <StickyTd style={{ left: columnWidths.slNoWidth }}>
-                {item.kpi_name}
-              </StickyTd>
-              <StickyTd
-                style={{ left: columnWidths.slNoWidth + columnWidths.kpiWidth }}
-              >
-                {item.stakeholders.join(", ")}
-              </StickyTd>
-              {years.map((year) =>
-                months.map((month) => {
-                  const period = `${month.toUpperCase()}'${year.slice(-2)}`;
-                  const statusObj = item.monthly_statuses.find(
-                    (status) => status.for_period === period
-                  );
-                  return (
-                    <>
-                      <Td
-                        key={period}
-                        bg={getBgColor(statusObj?.color)}
-                        style={{ textAlign: "center", cursor: "pointer" }}
-                        expanded={openColumns[period]}
-                        onClick={() => handleColumnClick(month, year)}
-                      ></Td>
-                      {openColumns[period] &&
-                        availableSubColumns.map(({ key }) => (
-                          <Td
-                            key={`${period}-${key}`}
-                            style={{
-                              textAlign: "center",
-                              backgroundColor: getBgColor(statusObj?.[key]),
-                            }}
-                            expanded={openColumns[period]}
-                          ></Td>
-                        ))}
-                    </>
-                  );
-                })
-              )}
-            </tr>
-          ))}
+          {data.map((item, index) => {
+            const isLastRow = index === data.length - 1;
+            return (
+              <tr key={index}>
+                <StickyTd style={{ left: 0 }}>{index + 1}</StickyTd>
+                <StickyTd style={{ left: columnWidths.slNoWidth }}>
+                  {item.kpi_name}
+                </StickyTd>
+                <StickyTd
+                  style={{
+                    left: columnWidths.slNoWidth + columnWidths.kpiWidth,
+                  }}
+                >
+                  {item.stakeholders.join(", ")}
+                </StickyTd>
+                {years.map((year) =>
+                  months.map((month) => {
+                    const period = `${month.toUpperCase()}'${year.slice(-2)}`;
+                    const statusObj = item.monthly_statuses.find(
+                      (status) => status.for_period === period
+                    );
+                    const isMonthSelect =
+                      month.toLowerCase() ===
+                        Object.keys(openColumns)[0]
+                          ?.slice(0, 3)
+                          .toLowerCase() || false;
+                    return (
+                      <>
+                        <Td
+                          key={period}
+                          bg={getBgColor(statusObj?.color)}
+                          style={{
+                            textAlign: "center",
+                            cursor: "pointer",
+                          }}
+                          expanded={openColumns[period]}
+                          onClick={() => handleColumnClick(month, year)}
+                          isFirst={isMonthSelect}
+                          isLastRow={isLastRow}
+                        ></Td>
+                        {openColumns[period] &&
+                          availableSubColumns.map(({ key }, columnIdx) => (
+                            <Td
+                              key={`${period}-${key}`}
+                              style={{
+                                textAlign: "center",
+                                backgroundColor: getBgColor(statusObj?.[key]),
+                              }}
+                              expanded={openColumns[period]}
+                              isLast={
+                                columnIdx === availableSubColumns.length - 1
+                              }
+                              isLastRow={isLastRow}
+                            ></Td>
+                          ))}
+                      </>
+                    );
+                  })
+                )}
+              </tr>
+            );
+          })}
         </tbody>
       </StyledTable>
     </TableContainer>

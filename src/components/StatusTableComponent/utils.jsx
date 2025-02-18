@@ -33,3 +33,24 @@ export const getBgColor = (color) => {
       return "#f0f0f0";
   }
 };
+
+export const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+export const columnsConfig = [
+  { key: "dataBricks", label: "DataBricks" },
+  { key: "sdb", label: "SDB" },
+  { key: "pipeline", label: "Pipeline" },
+];

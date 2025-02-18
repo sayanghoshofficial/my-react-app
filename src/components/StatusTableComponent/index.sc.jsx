@@ -45,16 +45,21 @@ export const Th = styled.th`
   font-family: "Inter";
   color: #242639;
   white-space: nowrap;
-  border: ${viewSizeCalculator(1, true)} solid rgba(194, 204, 217, 0.8);
   position: sticky;
   text-align: left;
   top: 0;
   z-index: 3;
-  border: ${(props) =>
-    props.expanded
-      ? `${viewSizeCalculator(1, true)} solid red`
-      : `${viewSizeCalculator(1, true)} solid rgba(194, 204, 217, 0.8)`};
-       box-sizing: border-box;
+  border: ${viewSizeCalculator(1, true)} solid rgba(194, 204, 217, 0.8);
+  ${({ expanded }) =>
+    expanded && `border-top: ${viewSizeCalculator(2, true)} solid red;`}
+  ${({ isFirst, expanded }) =>
+    isFirst &&
+    expanded &&
+    `border-left: ${viewSizeCalculator(2, true)} solid red;`}
+  ${({ isLast, expanded }) =>
+    isLast &&
+    expanded &&
+    `border-right: ${viewSizeCalculator(2, true)} solid red;`}
 `;
 
 export const Td = styled.td`
@@ -68,11 +73,20 @@ export const Td = styled.td`
   color: #242639;
   white-space: nowrap;
   background: ${(props) => props.bg || "#fff"};
-  border: ${(props) =>
-    props.expanded
-      ? `${viewSizeCalculator(1, true)} solid red`
-      : `${viewSizeCalculator(1, true)} solid rgba(194, 204, 217, 0.8)`};
-       box-sizing: border-box;
+  box-sizing: border-box;
+  ${({ isFirst, expanded }) =>
+    isFirst &&
+    expanded &&
+    `border-left: ${viewSizeCalculator(2, true)} solid red;`};
+  ${({ isLast, expanded }) =>
+    isLast &&
+    expanded &&
+    `border-right: ${viewSizeCalculator(2, true)} solid red;`};
+
+  ${({ isLastRow, expanded }) =>
+    isLastRow &&
+    expanded &&
+    `border-bottom: ${viewSizeCalculator(2, true)} solid red;`};
 `;
 
 export const StickyTd = styled(Td)`
