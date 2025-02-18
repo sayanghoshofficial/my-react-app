@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { viewSizeCalculator } from "./utils";
+import { viewSizeCalculator } from "../StatusTableComponent/utils";
 
 // Styled Components
 export const TableWrapper = styled.div`

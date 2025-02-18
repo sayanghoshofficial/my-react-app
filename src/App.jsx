@@ -1,14 +1,17 @@
 
 import styled from 'styled-components';
 import TableComponent from './components/TableComponent'
+import PopupComp from './components/popupcomp/PopupComp';
+import KPIAdminTable from './components/StatusTableComponent';
+import { mockData } from './components/StatusTableComponent/mockData';
 
 function App() {
   
 
   return (
     <AppContainer>
-      <TableComponent/>
-    </AppContainer>
+      <KPIAdminTable data={mockData.data}/>
+     </AppContainer>
   )
 }
 

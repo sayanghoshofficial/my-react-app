@@ -8,7 +8,7 @@ import {
   FixedColumn,
   THead,
 } from "./index.sc";
-import { viewSizeCalculator } from "./utils";
+import { viewSizeCalculator } from "../StatusTableComponent/utils";
 
 const TableComponent = () => {
   // Collect all unique dates and sort them
@@ -21,14 +21,14 @@ const TableComponent = () => {
   ).sort((a, b) => {
     const parseDate = (dateStr) => {
       const [monthStr, yearStr] = dateStr.split(" ");
-      const month = new Date(Date.parse(monthStr + " 1, 2020")).getMonth(); 
+      const month = new Date(Date.parse(monthStr + " 1, 2020")).getMonth();
       const year = parseInt(yearStr, 10);
-      return new Date(year, month); 
+      return new Date(year, month);
     };
-  
+
     const dateA = parseDate(a);
     const dateB = parseDate(b);
-  
+
     return dateA - dateB;
   });
 

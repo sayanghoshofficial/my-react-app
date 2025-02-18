@@ -18,3 +18,16 @@ export const viewSizeCalculator = (value, isPixel = false) => {
    
     // return addUnit ? `${calculatedValue}vw` : calculatedValue;
   };
+
+  export const getBgColor = (color) => {
+    switch (color) {
+      case "green":
+        return "#b6d7a8"; // Green color
+      case "yellow":
+        return "#fff2cc"; // Yellow color
+      case "red":
+        return "#f4cccc"; // Red color
+      default:
+        return "#f0f0f0"; // Default gray background
+    }
+  };
