@@ -4,13 +4,17 @@ import TableComponent from './components/TableComponent'
 import PopupComp from './components/popupcomp/PopupComp';
 import KPIAdminTable from './components/StatusTableComponent';
 import { mockData } from './components/StatusTableComponent/mockData';
+import LogScaleChart from './components/graphs/LogScaleChart';
+import DottedLoader from './components/DotedLoader';
 
 function App() {
   
 
   return (
     <AppContainer>
-      <KPIAdminTable data={mockData.data}/>
+      {/* <KPIAdminTable data={mockData.data}/> */}
+      {/* <LogScaleChart/> */}
+      <DottedLoader/>
      </AppContainer>
   )
 }
